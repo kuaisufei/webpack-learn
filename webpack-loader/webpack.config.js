@@ -15,7 +15,7 @@ module.exports = {
   //   inline: true//实时刷新
   // }
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js|jsx$/, //是一个正则，代表js或者jsx后缀的文件要使用下面的loader
         loader: "babel-loader"
