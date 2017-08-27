@@ -1,0 +1,12 @@
+$length: 50px;
+#a{
+	width: $length;
+	height: $length;
+}
+
+$radius: 10px;
+#b{
+	display:flex;
+	border-radius: $radius;
+	transform: scale(0.8);
+}
