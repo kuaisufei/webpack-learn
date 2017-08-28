@@ -9,24 +9,10 @@ const autoprefixer = require('autoprefixer'),
 
 
 module.exports = {
-  // 打包文件的存放地址
-  // devServer: {
-  //   contentBase: './public',
-  //   colors: true,
-  //   historyApiFallback: true,
-  //   inline: true
-  // },
-  // devtool: 'inline-source-map',//配置生成Source Maps，选择合适的选项
-  // devServer: {
-  //   contentBase: path.join(__dirname, "public"),
-  //   compress: true,
-  //   port: 9000,
-  //   hot : true
-  // },
   devtool: 'eval-source-map',
   entry: {
     index: __dirname + '/index.js',
-    entry: __dirname + '/entry.js',
+    // entry: __dirname + '/entry.js',
     extract: __dirname + '/extract.js'
   },
   output: {
@@ -136,6 +122,10 @@ module.exports = {
       TWO: "1+1",
       "typeof window": JSON.stringify("object"),
       consoletest: JSON.stringify('this is a console test')
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common",
+      minChunks:2
     })
   ]
 }
@@ -146,6 +136,7 @@ htmlArray.forEach((element) => {
   if (element === 'index') {
     chunksArray.push('entry');
   }
+  chunksArray.push('common');
   const newPlugin = new HtmlWebpackPlugin({
     filename: element + '.html',
     template: element + '.html',   // 获取最初的html末班
