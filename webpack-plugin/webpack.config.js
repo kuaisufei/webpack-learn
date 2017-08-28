@@ -33,6 +33,13 @@ module.exports = {
     filename: 'js/[name].js',
     path: __dirname + '/public'
   },
+  devServer: {
+    historyApiFallback:true,
+    inline:true,
+    contentBase: path.join(__dirname, "public"),
+    compress: true,
+    port: 9000
+  },
   module: {
     rules: [
       {
@@ -73,7 +80,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: "url-loader?limit=8192&name=/img/[name].[hash:8].[ext]&publicPath=.."
+        include : path.join(__dirname, 'img'),
+        loader: "url-loader?limit=8192&name=/img/[name].[hash:8].[ext]&publicPath=..&ouputPath=."
       }
     ],
   },
@@ -107,6 +115,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'css/[name].css'
     }),
+    new webpack.HotModuleReplacementPlugin(),
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
     //     warnings: false,
